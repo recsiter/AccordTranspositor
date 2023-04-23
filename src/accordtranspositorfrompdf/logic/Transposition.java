@@ -41,7 +41,7 @@ public class Transposition {
             = {"F", "Hb", "Eb", "Ab", "Db", "d", "g", "c", "f", "ab", "db"};
 
     private static String chordRegex
-            = "(C|C#|Db|D#|Eb|E|F|F#|Gb|G#|Ab|A#|Bb|B)";
+            = "(C#|Cb|C|Db|D#|D|Eb|E|F#|F|Gb|G#|G|Ab|A#|A|B|H)";
 
 //// Szöveg beolvasása byte tömbbe
 //    public static void transposition(byte[] docxData, int transpositionDistence) {
@@ -74,7 +74,12 @@ public class Transposition {
         for (XWPFParagraph para : doc.getParagraphs()) {
             for (XWPFRun run : para.getRuns()) {
                 String text = run.getText(0);
-                if (text != null && Util.isAccordRow(text)) {
+                if (run.getText(0) == null || run.getText(0).
+                        trim().
+                        isEmpty()) {
+                    continue;
+                }
+                if (text != null) {
                     Matcher matcher = pattern.matcher(text);
                     int index = 0;
                     StringBuilder newText = new StringBuilder();
@@ -82,10 +87,11 @@ public class Transposition {
                         int start = matcher.start();
                         int end = matcher.end();
 
-                        String chord = text.substring(index, start);
-                        newText.append(chord);
+                        String chord = matcher.group();
+
                         String transposedChord = transposeAccord.
                                 transposeAccord(chord, semitones);
+
                         newText.append(transposedChord);
                         index = end;
                     }
