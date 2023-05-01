@@ -79,7 +79,7 @@ public class Transposition {
                         isEmpty()) {
                     continue;
                 }
-                if (text != null && Util.isAccordRow(text)) {
+                if (text != null && run.isBold()) {
                     Matcher matcher = pattern.matcher(text);
                     int index = 0;
                     StringBuilder newText = new StringBuilder();

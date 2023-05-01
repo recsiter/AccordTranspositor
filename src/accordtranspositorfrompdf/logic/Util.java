@@ -43,7 +43,8 @@ public class Util {
         System.out.println("---" + text + "---");
         return calculateRelation(text) <= WHITESPACERELATION || Arrays.stream(
                 SPACIALCHARACTERS).
-                anyMatch(target -> text.contains(target));
+                anyMatch(target -> text.contains(target)) || text.
+                contains("<b>") || text.contains("</b>");
 
     }
 
