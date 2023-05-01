@@ -7,18 +7,18 @@ import java.util.Arrays;
  */
 public class TransposeFlatToFlat implements TransposeAccord {
 
-    public static final String[] FLATNOTES
-            = {"C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Hb", "H"};
+    private final String[] FLATNOTES
+            = Util.FLATNOTES;
 
     @Override
     public String transposeAccord(String note, int semitones) {
         int indexNote = Arrays.asList(FLATNOTES).
                 indexOf(note);
-        indexNote += semitones;
+        indexNote += semitones * 2;
         if (indexNote < 0) {
             indexNote = (FLATNOTES.length) + indexNote;
         }
-        return FLATNOTES[indexNote % 11];
+        return FLATNOTES[indexNote % 24];
     }
 
 }

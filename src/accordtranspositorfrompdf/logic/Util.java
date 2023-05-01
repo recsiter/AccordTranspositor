@@ -9,10 +9,12 @@ import java.util.regex.Pattern;
  */
 public class Util {
 
+    public static final String[] SHARPNOTES
+            = {"C", "c", "C#", "c#", "D", "d", "D#", "d#", "E", "e", "F", "f", "F#", "f#", "G", "g", "G#", "g#", "A", "a", "A#", "a#", "H", "h"};
+    public static final String[] FLATNOTES
+            = {"C", "c", "Db", "db", "D", "d", "Eb", "eb", "E", "e", "F", "f", "Gb", "gb", "G", "g", "Ab", "ab", "A", "a", "Hb", "hb", "H", "h"};
+
     private static final double WHITESPACERELATION = 0.5;
-    private static String chordRegex
-            = "[CcDdFfGgBbHh][#b]?(?![a-zA-Z])[^\\w]*";
-    private static String specialCharacters = "#|[0-9]";
     public static HashMap<String, String> CORRECTNOTES
             = new HashMap<String, String>() {
         {
@@ -37,16 +39,11 @@ public class Util {
     };
 
     public static boolean isAccordRow(String text) {
-//        Pattern patternSpecial = Pattern.compile(specialCharacters);
         System.out.println("---" + text + "---");
-        Pattern pattern = Pattern.compile(chordRegex);
-
-//        Matcher matcherSpecial = patternSpecial.matcher(text);
-//        Matcher matcher = pattern.matcher(text);
-        return countWhiteSpaces(text) <= WHITESPACERELATION;
+        return calculateRelation(text) <= WHITESPACERELATION;
     }
 
-    private static double countWhiteSpaces(String text) {
+    private static double calculateRelation(String text) {
         double whiteSpace = 0.0;
         double nonWhiteSpace = 0.0;
 

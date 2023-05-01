@@ -7,20 +7,20 @@ import java.util.Arrays;
  */
 public class TransposeFlatToSharp implements TransposeAccord {
 
-    public static final String[] SHARPNOTES
-            = {"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "H"};
-    public static final String[] FLATNOTES
-            = {"C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Hb", "H"};
+    private final String[] SHARPNOTES
+            = Util.SHARPNOTES;
+    private final String[] FLATNOTES
+            = Util.FLATNOTES;
 
     @Override
     public String transposeAccord(String note, int semitones) {
 
         int indexNote = Arrays.asList(FLATNOTES).
                 indexOf(note);
-        indexNote += semitones;
+        indexNote += semitones * 2;
         if (indexNote < 0) {
             indexNote = (SHARPNOTES.length) + indexNote;
         }
-        return SHARPNOTES[indexNote % 11];
+        return SHARPNOTES[indexNote % 24];
     }
 }
