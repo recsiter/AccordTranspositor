@@ -1,5 +1,6 @@
 package accordtranspositorfrompdf.logic;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,8 +14,8 @@ public class Util {
             = {"C", "c", "C#", "c#", "D", "d", "D#", "d#", "E", "e", "F", "f", "F#", "f#", "G", "g", "G#", "g#", "A", "a", "A#", "a#", "H", "h"};
     public static final String[] FLATNOTES
             = {"C", "c", "Db", "db", "D", "d", "Eb", "eb", "E", "e", "F", "f", "Gb", "gb", "G", "g", "Ab", "ab", "A", "a", "Hb", "hb", "H", "h"};
-
-    private static final double WHITESPACERELATION = 0.5;
+    public static final String[] SPACIALCHARACTERS = {"#", "7", "/", "|"};
+    private static final double WHITESPACERELATION = 0.6;
     public static HashMap<String, String> CORRECTNOTES
             = new HashMap<String, String>() {
         {
@@ -40,7 +41,10 @@ public class Util {
 
     public static boolean isAccordRow(String text) {
         System.out.println("---" + text + "---");
-        return calculateRelation(text) <= WHITESPACERELATION;
+        return calculateRelation(text) <= WHITESPACERELATION || Arrays.stream(
+                SPACIALCHARACTERS).
+                anyMatch(target -> text.contains(target));
+
     }
 
     private static double calculateRelation(String text) {
