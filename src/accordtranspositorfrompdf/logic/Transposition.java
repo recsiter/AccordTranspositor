@@ -41,7 +41,7 @@ public class Transposition {
             = {"F", "Hb", "Eb", "Ab", "Db", "d", "g", "c", "f", "ab", "db"};
 
     private static String chordRegex
-            = "(C#|Cb|C|Db|D#|D|Eb|E|F#|F|Gb|G#|G|Ab|A#|A|B|H)";
+            = "(c#|cb|c|C#|Cb|C|d#|db|d|Db|D#|D|eb|e|Eb|E|f#|f|F#|F|g#|gb|g|Gb|G#|G|a#|ab|a|Ab|A#|A|hb|h|H|Hb)";
 
 //// Szöveg beolvasása byte tömbbe
 //    public static void transposition(byte[] docxData, int transpositionDistence) {
@@ -56,9 +56,9 @@ public class Transposition {
 
     public XWPFDocument transposeChordsInDocx(XWPFDocument doc, int semitones) {
         TransposeAccord transposeAccord;
-//        if (ISFLATKEYFROM && ISFLATKEYTO) {
-//            transposeAccord = new TransposeFlatToFlat();
-//        } 
+        if (ISFLATKEYFROM && ISFLATKEYTO) {
+            transposeAccord = new TransposeFlatToFlat();
+        }
         if (!ISFLATKEYFROM && !ISFLATKEYTO) {
             transposeAccord = new TransposeSharpToSharp();
         } else if (ISFLATKEYFROM && !ISFLATKEYTO) {
@@ -79,7 +79,7 @@ public class Transposition {
                         isEmpty()) {
                     continue;
                 }
-                if (text != null) {
+                if (text != null && Util.isAccordRow(text)) {
                     Matcher matcher = pattern.matcher(text);
                     int index = 0;
                     StringBuilder newText = new StringBuilder();
@@ -88,15 +88,15 @@ public class Transposition {
                         int end = matcher.end();
 
                         String chord = matcher.group();
-
                         String transposedChord = transposeAccord.
                                 transposeAccord(chord, semitones);
-
+                        newText.append(text.substring(index, start));
                         newText.append(transposedChord);
                         index = end;
                     }
                     newText.append(text.substring(index));
-                    run.setText(newText.toString(), 0);
+                    run.setText("", 0); // remove the original text
+                    run.setText(newText.toString(), 0); // set the new text
                 }
             }
         }
@@ -105,7 +105,6 @@ public class Transposition {
 
     }
 
-    //fafasdfasdfsd
     public static void correctNoteNames(XWPFDocument doc,
             HashMap<String, String> map) {
         for (XWPFParagraph para : doc.getParagraphs()) {
