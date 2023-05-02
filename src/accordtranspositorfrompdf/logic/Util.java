@@ -40,11 +40,10 @@ public class Util {
     };
 
     public static boolean isAccordRow(String text) {
-        System.out.println("---" + text + "---");
+//        System.out.println("---" + text + "---");
         return calculateRelation(text) <= WHITESPACERELATION || Arrays.stream(
                 SPACIALCHARACTERS).
-                anyMatch(target -> text.contains(target)) || text.
-                contains("<b>") || text.contains("</b>");
+                anyMatch(target -> text.contains(target));
 
     }
 

@@ -1,8 +1,10 @@
 package accordtranspositorfrompdf.logic;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.regex.MatchResult;
@@ -41,7 +43,7 @@ public class Transposition {
             = {"F", "Hb", "Eb", "Ab", "Db", "d", "g", "c", "f", "ab", "db"};
 
     private static String chordRegex
-            = "(c#|cb|c|C#|Cb|C|d#|db|d|Db|D#|D|eb|e|Eb|E|f#|f|F#|F|g#|gb|g|Gb|G#|G|a#|ab|a|Ab|A#|A|hb|h|H|Hb)";
+            = "(?<=[/\\s]|^)(c#|cb|c|C#|Cb|C|d#|db|d|Db|D#|D|eb|e|Eb|E|f#|f|F#|F|g#|gb|g|Gb|G#|G|a#|ab|a|Ab|A#|A|hb|h|H|Hb)";
 
 //// Szöveg beolvasása byte tömbbe
 //    public static void transposition(byte[] docxData, int transpositionDistence) {
