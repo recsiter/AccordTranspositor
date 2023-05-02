@@ -21,7 +21,7 @@ public class AccordTranspositorFromPDF {
     public static void main(String[] args) throws IOException, SAXException {
         Transposition transposition = new Transposition(false, false);
         XWPFDocument readIn = FileHandler.readDocxFile(
-                "C:\\Users\\csomo\\Documents\\NetBeansProjects\\AccordTranspositorFromPDF\\src\\Bízzál én lelkem (hm).docx");
+                "C:\\Users\\csomo\\Documents\\NetBeansProjects\\AccordTranspositorFromPDF\\src\\Vágylak látni (H).docx");
         XWPFDocument newDoc = transposition.transposeChordsInDocx(readIn, 2);
         FileHandler.writeToDocx(newDoc,
                 "C:\\Users\\csomo\\Desktop\\TestFolder\\proba.docx");
