@@ -43,7 +43,7 @@ public class Transposition {
             = {"F", "Hb", "Eb", "Ab", "Db", "d", "g", "c", "f", "ab", "db"};
 
     private static String chordRegex
-            = "(?<=[/\\s]|^)(c#|cb|c|C#|Cb|C|d#|db|d|Db|D#|D|eb|e|Eb|E|f#|f|F#|F|g#|gb|g|Gb|G#|G|a#|ab|a|Ab|A#|A|hb|h|H|Hb)";
+            = "(?<=[/\\s(]|^)(c#|cb|c|C#|Cb|C|d#|db|d|Db|D#|D|eb|e|Eb|E|f#|f|F#|F|g#|gb|g|Gb|G#|G|a#|ab|a|Ab|A#|A|hb|h|H|Hb)";
 
 //// Szöveg beolvasása byte tömbbe
 //    public static void transposition(byte[] docxData, int transpositionDistence) {
@@ -60,8 +60,7 @@ public class Transposition {
         TransposeAccord transposeAccord;
         if (ISFLATKEYFROM && ISFLATKEYTO) {
             transposeAccord = new TransposeFlatToFlat();
-        }
-        if (!ISFLATKEYFROM && !ISFLATKEYTO) {
+        } else if (!ISFLATKEYFROM && !ISFLATKEYTO) {
             transposeAccord = new TransposeSharpToSharp();
         } else if (ISFLATKEYFROM && !ISFLATKEYTO) {
             transposeAccord = new TransposeFlatToSharp();
@@ -112,7 +111,7 @@ public class Transposition {
         for (XWPFParagraph para : doc.getParagraphs()) {
             for (XWPFRun run : para.getRuns()) {
                 String text = run.getText(0);
-                if (text != null && Util.isAccordRow(text)) {
+                if (text != null && run.isBold()) {
                     for (Map.Entry<String, String> entry : map.entrySet()) {
                         String key = entry.getKey();
                         String value = entry.getValue();

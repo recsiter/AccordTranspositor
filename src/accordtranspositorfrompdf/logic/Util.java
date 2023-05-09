@@ -19,22 +19,25 @@ public class Util {
     public static HashMap<String, String> CORRECTNOTES
             = new HashMap<String, String>() {
         {
-            put("Cisz", "C# ");
-            put("Disz", "D# ");
-            put("Fisz", "F# ");
-            put("Gisz", "G# ");
-            put("Aisz", "A# ");
-            put("cisz", "c# ");
-            put("disz", "d# ");
-            put("fisz", "f# ");
-            put("gisz", "g# ");
-            put("aisz", "a# ");
-            put("Esz", "Eb ");
-            put("Gesz", "Gb ");
-            put("Asz", "Ab ");
-            put("esz", "eb ");
-            put("gesz", "gb ");
-            put("asz", "ab ");
+            put("Cisz", "C#");
+            put("Disz", "D#");
+            put("Fisz", "F#");
+            put("Gisz", "G#");
+            put("Aisz", "A#");
+            put("cisz", "c#");
+            put("disz", "d#");
+            put("fisz", "f#");
+            put("gisz", "g#");
+            put("aisz", "a#");
+            put("Esz", "Eb");
+            put("Gesz", "Gb");
+            put("Asz", "Ab");
+            put("B", "H");
+            put("Bb", "Hb");
+            put("esz", "eb");
+            put("gesz", "gb");
+            put("asz", "ab");
+            put("asz", "ab");
 
         }
     };
